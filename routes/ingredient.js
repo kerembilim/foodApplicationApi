@@ -15,5 +15,11 @@ router.get('/sql/:id',async(req, res, next) =>{
   });
 });
 
+router.get('/all', async(req, res, next) =>{
+  connection.query('SELECT * FROM   Ingredient', (err, result) => {
+    res.json({result});
+  });
+});
+
 
 module.exports = router;
