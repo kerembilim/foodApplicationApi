@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const { check, validationResult } = require('express-validator');
+
 const dbConnection = require('../helper/dbHelper');
 const connection = dbConnection();
 
@@ -16,7 +18,13 @@ router.get('/all', async(req, res, next) =>{
 });
 
 
-router.post('/calculate', async(req, res, next) =>{
+router.post('/calculate', [
+  check('ingredient').isArray().isInt()
+], async(req, res, next) =>{
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() })
+  }
   let response = {};
 
    connection.query('select Food.*, group_concat(Ingredient.id) as Ingredient from Food left JOIN FoodIngredient on FoodIngredient.foodId = Food.id left join Ingredient on Ingredient.id = FoodIngredient.ıngredientId group by Food.id;', (err, result) => {
