@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/all', async(req, res, next) =>{
+router.get('/all', (req, res, next) =>{
   connection.query('SELECT * FROM Food', (err, result) => {
     res.json({result});
   });
@@ -20,7 +20,7 @@ router.get('/all', async(req, res, next) =>{
 
 router.post('/calculate', [
   check('ingredient').isArray().isInt()
-], async(req, res, next) =>{
+],(req, res, next) =>{
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() })
