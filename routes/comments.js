@@ -14,6 +14,10 @@ router.get('/sql/:id',async(req, res, next) =>{
     res.json({result});
   });
 });
-
+router.get('/all', async(req, res, next) =>{
+  connection.query('SELECT * FROM Comment', (err, result) => {
+    res.json({result});
+  });
+});
 
 module.exports = router;
