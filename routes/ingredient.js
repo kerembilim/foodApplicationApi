@@ -4,13 +4,13 @@ var router = express.Router();
 const dbConnection = require('../helper/dbHelper');
 const connection = dbConnection();
 
-/* GET users listing. */
+/* GET ingredient listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/sql/:id', async(req, res, next) =>{
-  connection.query('SELECT * FROM User where id= '+req.params.id, (err, result) => {
+router.get('/sql/:id',async(req, res, next) =>{
+  connection.query('SELECT * FROM Ingredient where id = '+req.params.id, (err, result) => {
     res.json({result});
   });
 });
