@@ -29,7 +29,6 @@ router.post('/calculate', [
 
    connection.query('select Food.*, group_concat(Ingredient.id) as Ingredient from Food left JOIN FoodIngredient on FoodIngredient.foodId = Food.id left join Ingredient on Ingredient.id = FoodIngredient.ıngredientId group by Food.id;', (err, result) => {
     let response = [];
-    console.log(result);
     result.forEach(element => {//herbir yemek için
       const array = element.Ingredient.split(',');
       let array2 = [];
