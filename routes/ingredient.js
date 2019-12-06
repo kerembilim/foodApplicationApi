@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const dbConnection = require('../helper/dbHelper');
-const connection = dbConnection();
+const connection = require('../helper/dbHelper').mysql_pool;
 
 /* GET ingredient listing. */
 router.get('/', function(req, res, next) {

@@ -3,8 +3,7 @@ var router = express.Router();
 
 const { check, validationResult } = require('express-validator');
 
-const dbConnection = require('../helper/dbHelper');
-const connection = dbConnection();
+const connection = require('../helper/dbHelper').mysql_pool;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
